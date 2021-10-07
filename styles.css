@@ -10,6 +10,9 @@ a {
   text-decoration: none;
   color: black;
 }
+em{
+  font-style: normal;
+}
 ul {
   list-style: none;
 }
@@ -73,6 +76,7 @@ nav h3 {
   width: 700px;
   height: 100vh;
   background: #fff;
+  transform-origin: 100% 50%;
 }
 
 /* .active {
@@ -96,20 +100,33 @@ nav h3 {
   flex: 0.8;
 }
 
-.social li {
-  margin: 25px 0;
-
-  overflow: hidden;
+.social a {
+  padding-bottom: 25px;
+display: block;
+ 
 }
-.social li > a,
-.menu li > a {
+.social a ,.menu a{
+  /* border: 2px solid black; */
+ 
+ 
+  display: inline-block;
+ 
+  
+}
+.social li em,
+.menu li em{
+  /* border:2px solid blueviolet; */
+  overflow: hidden;
   display: block;
-
+  width: fit-content;
   position: relative;
 }
 
-.social li > a::after,
-.menu li > a::after {
+.social li span,.menu li span{
+  display: inline-block;
+}
+.social li span::before,
+.menu li span::before {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -118,8 +135,8 @@ nav h3 {
   width: 100%;
   background: white;
 }
-.social li > a::before,
-.menu li > a::before {
+.social li span::after,
+.menu li span::after {
   content: attr(data-text);
   position: absolute;
   top: 100%;
@@ -132,12 +149,13 @@ nav h3 {
 .menu {
   flex: 1.2;
 }
-.menu li {
-  margin: 5px 0;
-  overflow: hidden;
-}
-.menu li > a {
+/* .menu li {
+  margin-bottom: 5px;
+  
+} */
+.menu li span {
   font-size: 3.5rem;
+  font-weight: 500;
 }
 
 .contact {

@@ -1,84 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cuberto</title>
 
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <nav>
-      <section>
-        <h3>cuberto</h3>
-        <div class="menuBtnContainer">
-          <p>menu</p>
-          <div id="menuButton" class="menuButton">
-            <div></div>
-            <div></div>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuberto</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <nav>
+    <section>
+      <h3>cuberto</h3>
+      <div class="menuBtnContainer">
+        <p>menu</p>
+        <div id="menuButton" class="menuButton">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </section>
+    <aside id="menuContainer" class="menuContainer">
+      <section class="links">
+        <div class="social">
+          <p>Social</p>
+          <ul>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Facebook">Facebook</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Behance">Behance</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Dribble">Dribbble</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Instagram">Instagram</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="YouTube">YouTube</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Patreon">Patreon</span></em></a>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">
+          <p>Menu</p>
+          <ul>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Work">Work</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="About">About</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Services">Services</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Tutorials">Tutorials</span></em></a>
+            </li>
+            <li>
+              <a class="listAnim" href="#"><em><span data-text="Contacts">Contacts</span></em></a>
+            </li>
+          </ul>
         </div>
       </section>
-      <aside id="menuContainer" class="menuContainer">
-        <section class="links">
-          <div class="social">
-            <p>Social</p>
-            <ul>
-              <li>
-                <a class="listAnim" href="#" data-text="Facebook">Facebook</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Behance">Behance</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Dribble">Dribbble</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Instagram">Instagram</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="YouTube">YouTube</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Patreon">Patreon</a>
-              </li>
-            </ul>
-          </div>
-          <div class="menu">
-            <p>Menu</p>
-            <ul>
-              <li><a class="listAnim" href="#" data-text="Work">Work</a></li>
-              <li><a class="listAnim" href="#" data-text="About">About</a></li>
-              <li>
-                <a class="listAnim" href="#" data-text="Services">Services</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Tutorials">Tutorials</a>
-              </li>
-              <li>
-                <a class="listAnim" href="#" data-text="Contacts">Contacts</a>
-              </li>
-            </ul>
-          </div>
-        </section>
-        <div class="contact">
-          <p>Get in touch</p>
-          <a href="#">info@cuberto.com</a>
-        </div>
-      </aside>
-    </nav>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/CSSRulePlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/Draggable.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/EaselPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/MotionPathPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/PixiPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/TextPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollToPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/EasePack.min.js"></script>
+      <div class="contact">
+        <p>Get in touch</p>
+        <a href="#">info@cuberto.com</a>
+      </div>
+    </aside>
+  </nav>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/CSSRulePlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/EaselPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/MotionPathPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/PixiPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollToPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/EasePack.min.js"></script>
 
-    <script src="app.js"></script>
-  </body>
+  <script src="app.js"></script>
+</body>
+
 </html>
