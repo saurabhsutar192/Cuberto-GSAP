@@ -35,15 +35,15 @@ gsap.registerEffect({
   },
 });
 
-for (li of list) {
-  li.addEventListener("mouseenter", (e) => {
-    for (child of e.target.childNodes) {
-      gsap.effects.roll(child, { y: -100 });
-    }
-  });
-  li.addEventListener("mouseleave", (e) => {
-    for (child of e.target.childNodes) {
-      gsap.effects.roll(child, { y: 0 });
-    }
-  });
-}
+// for (li of list) {
+//   li.addEventListener("mouseenter", (e) => {
+//     for (child of e.target.childNodes) {
+//       gsap.effects.roll(child, { y: -100 });
+//     }
+//   });
+//   li.addEventListener("mouseleave", (e) => {
+//     for (child of e.target.childNodes) {
+//       gsap.effects.roll(child, { y: 0 });
+//     }
+//   });
+// }
