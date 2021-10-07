@@ -1,0 +1,181 @@
+@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+ul {
+  list-style: none;
+}
+
+body {
+  background: rgba(238, 238, 238, 0.7);
+  overflow: hidden;
+}
+
+nav {
+  padding: 60px;
+  position: relative;
+}
+nav > section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+nav h3 {
+  font-family: "Hammersmith One", sans-serif;
+  font-size: 1.65rem;
+}
+
+.menuBtnContainer > p {
+  font-weight: 400;
+  margin: 0 25px;
+}
+
+.menuBtnContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.menuButton {
+  width: 25px;
+  position: sticky;
+  right: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.menuButton div {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: 5px;
+  background-color: black;
+}
+
+.menuContainer {
+  /* transform: translateX(100%); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 700px;
+  height: 100vh;
+  background: #fff;
+}
+
+/* .active {
+  display: flex;
+} */
+
+.menuContainer p {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.links {
+  display: flex;
+  margin-top: -60px;
+  padding: 0 100px;
+}
+.links p {
+  margin-bottom: 35px;
+}
+
+.social {
+  flex: 0.8;
+}
+
+.social li {
+  margin: 25px 0;
+
+  overflow: hidden;
+}
+.social li > a,
+.menu li > a {
+  display: block;
+
+  position: relative;
+}
+
+.social li > a::after,
+.menu li > a::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+}
+.social li > a::before,
+.menu li > a::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+}
+
+.menu {
+  flex: 1.2;
+}
+.menu li {
+  margin: 5px 0;
+  overflow: hidden;
+}
+.menu li > a {
+  font-size: 3.5rem;
+}
+
+.contact {
+  position: absolute;
+  bottom: 50px;
+  left: 100px;
+}
+
+.contact p {
+  margin-bottom: 10px;
+}
+.contact a {
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  nav {
+    padding: 30px;
+  }
+  .menuBtnContainer > p {
+    display: none;
+  }
+  .menuContainer {
+    width: 100vw;
+  }
+  .social {
+    display: none;
+  }
+  .links {
+    padding: 0 50px;
+  }
+  .contact {
+    left: 50px;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu li > a {
+    font-size: 2rem;
+  }
+}
