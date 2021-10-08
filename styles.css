@@ -10,7 +10,8 @@ a {
   text-decoration: none;
   color: black;
 }
-h5{
+h5,
+h4 {
   font-weight: normal;
 }
 ul {
@@ -19,7 +20,7 @@ ul {
 
 body {
   background: rgba(238, 238, 238, 0.7);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 nav {
@@ -37,7 +38,7 @@ nav h3 {
   font-size: 1.65rem;
 }
 
-.menuBtnContainer > p {
+.menuBtnContainer > h4 {
   font-weight: 400;
   margin: 0 25px;
 }
@@ -48,20 +49,48 @@ nav h3 {
   position: relative;
 }
 .menuButton {
-  width: 25px;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: sticky;
   right: 0;
   z-index: 1;
+  
   cursor: pointer;
 }
+
+.menuButton::before{
+  content: "";
+  position: absolute;
+  /* transform-origin: 20% 80%; */
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: black;
+  border-radius: 50%;
+  z-index: -1;
+transform: scale(0);
+}
+
+
+
 
 .menuButton div {
   display: block;
   width: 100%;
   height: 2px;
-  margin-top: 5px;
+  margin: 3px 0;
   background-color: black;
 }
+
+/* .hovered {
+  background-color: white;
+} */
 
 .menuContainer {
   /* transform: translateX(100%); */
@@ -83,7 +112,7 @@ nav h3 {
   display: flex;
 } */
 
-.menuContainer p {
+.menuContainer h4 {
   color: rgba(0, 0, 0, 0.3);
 }
 
@@ -92,7 +121,7 @@ nav h3 {
   margin-top: -60px;
   padding: 0 100px;
 }
-.links p {
+.links h4 {
   margin-bottom: 35px;
 }
 
@@ -102,27 +131,27 @@ nav h3 {
 
 .social a {
   padding-bottom: 25px;
-display: block;
- 
+  display: block;
 }
-.social a ,.menu a{
+.social a,
+.menu a {
   /* border: 2px solid black; */
- 
- 
+
   display: inline-block;
- 
-  
 }
 .social li h5,
-.menu li h5{
+.menu li h5 {
   /* border:2px solid blueviolet; */
   overflow: hidden;
   display: block;
   width: fit-content;
   position: relative;
+
+  font-size: 1.1rem;
 }
 
-.social li span,.menu li span{
+.social li span,
+.menu li span {
   display: inline-block;
 }
 .social li span::before,
@@ -139,11 +168,15 @@ display: block;
 .menu li span::after {
   content: attr(data-text);
   position: absolute;
-  top: 110%;
+
+  top: 130%;
   left: 0;
   height: 100%;
   width: 100%;
   background: white;
+}
+.menu li span::after {
+  top: 105%;
 }
 
 .menu {
@@ -164,18 +197,61 @@ display: block;
   left: 100px;
 }
 
-.contact p {
+.contact h4 {
   margin-bottom: 10px;
 }
 .contact a {
   text-decoration: underline;
 }
 
+.cursor {
+  z-index: 10;
+  height: 10px;
+  width: 10px;
+  background: rgba(0, 0, 0);
+  position: fixed;
+  border-radius: 50%;
+  top: -20px;
+  left: -20px;
+  /* top: 50%;
+  left: 10%;
+  -webkit-transform: translate(-50%, -50%) rotate(0deg);
+  transform: translate(-50%, -50%) rotate(0deg); */
+  user-select: none;
+  pointer-events: none;
+  overflow: visible;
+}
+/* .cursor::after{
+  content: "";
+  height: 10px;
+  width: 10px;
+ 
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  top: 0;
+  left: 0;
+  background: transparent;
+
+  backdrop-filter: invert(100%);
+} */
+
+.filter {
+  background: transparent;
+
+  backdrop-filter: invert(100%);
+}
+.filter2 {
+  background: transparent;
+
+  backdrop-filter: invert(100%);
+}
+
 @media (max-width: 767px) {
   nav {
     padding: 30px;
   }
-  .menuBtnContainer > p {
+  .menuBtnContainer > h4 {
     display: none;
   }
   .menuContainer {
