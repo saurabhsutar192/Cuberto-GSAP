@@ -45,7 +45,7 @@ for (li of anchors) {
   li.addEventListener("mouseenter", (e) => {
     let child = e.target.childNodes[0].childNodes[0];
 
-    gsap.effects.roll(child, { y: -100 });
+    gsap.effects.roll(child, { y: -110 });
   });
   li.addEventListener("mouseleave", (e) => {
     let child = e.target.childNodes[0].childNodes[0];

@@ -10,8 +10,8 @@ a {
   text-decoration: none;
   color: black;
 }
-em{
-  font-style: normal;
+h5{
+  font-weight: normal;
 }
 ul {
   list-style: none;
@@ -113,8 +113,8 @@ display: block;
  
   
 }
-.social li em,
-.menu li em{
+.social li h5,
+.menu li h5{
   /* border:2px solid blueviolet; */
   overflow: hidden;
   display: block;
@@ -139,7 +139,7 @@ display: block;
 .menu li span::after {
   content: attr(data-text);
   position: absolute;
-  top: 100%;
+  top: 110%;
   left: 0;
   height: 100%;
   width: 100%;
