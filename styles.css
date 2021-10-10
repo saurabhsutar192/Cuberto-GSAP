@@ -182,8 +182,8 @@ transform: scale(0);
 .menu {
   flex: 1.2;
 }
-/* .menu li {
-  margin-bottom: 5px;
+/* .menu h5,.social h5 {
+  border: 2px solid red;
   
 } */
 .menu li span {

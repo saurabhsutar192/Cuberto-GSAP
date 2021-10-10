@@ -2,6 +2,7 @@ let menuButton = document.getElementById("menuButton");
 let menuContainer = document.getElementById("menuContainer");
 let list = document.getElementsByTagName("li");
 let anchors = document.querySelectorAll("li a");
+let links = document.querySelectorAll("li a h5");
 let cursor = document.querySelector(".cursor");
 let menuBars = document.querySelectorAll(".menuButton div");
 gsap.registerPlugin(CSSRulePlugin);
@@ -61,8 +62,6 @@ menuButton.addEventListener("click", () => {
   menuTween.progress() * 100 > 0 ? menuTween.reverse() : menuTween.play();
 });
 
-
-
 for (li of anchors) {
   li.addEventListener("mousemove", (e) => {
     let target = e.currentTarget;
@@ -93,17 +92,15 @@ for (li of anchors) {
   });
 }
 
-
-
 window.addEventListener("mousemove", (e) => {
   // gsap.effects.move(".cursor", { top: e.pageY, left: e.pageX });
   const cursorPosition = {
     left: e.clientX,
     top: e.clientY,
   };
-  const triggerDistance = menuButton.getBoundingClientRect().width;
+  const menuDistance = menuButton.getBoundingClientRect().width;
 
-  const targetPosition = {
+  const menuPosition = {
     left:
       menuButton.getBoundingClientRect().left +
       menuButton.getBoundingClientRect().width / 2,
@@ -112,8 +109,8 @@ window.addEventListener("mousemove", (e) => {
       menuButton.getBoundingClientRect().height / 2,
   };
   const distance = {
-    x: targetPosition.left - cursorPosition.left,
-    y: targetPosition.top - cursorPosition.top,
+    x: menuPosition.left - cursorPosition.left,
+    y: menuPosition.top - cursorPosition.top,
   };
 
   const angle = Math.atan2(distance.x, distance.y);
@@ -121,11 +118,11 @@ window.addEventListener("mousemove", (e) => {
     distance.x * distance.x + distance.y * distance.y
   );
 
-  if (hypotenuse < triggerDistance) {
+  if (hypotenuse < menuDistance) {
     cursor.classList.add("filter");
     gsap.to(cursor, 0.2, {
-      left: (targetPosition.left - (Math.sin(angle) * hypotenuse) / 5)-35,
-      top: (targetPosition.top - (Math.cos(angle) * hypotenuse) / 5)-35,
+      left: menuPosition.left - (Math.sin(angle) * hypotenuse) / 5 - 35,
+      top: menuPosition.top - (Math.cos(angle) * hypotenuse) / 5 - 35,
       height: menuButton.clientHeight,
       width: menuButton.clientWidth,
     });
@@ -147,6 +144,42 @@ window.addEventListener("mousemove", (e) => {
 
     for (bar of menuBars) {
       gsap.to(bar, 0.2, {
+        x: 0,
+        y: 0,
+      });
+    }
+  }
+
+  // for lists
+
+  for (li of links) {
+    
+    const listDistance = li.getBoundingClientRect().width/4;
+
+    const listPosition = {
+      left:
+        li.getBoundingClientRect().left + li.getBoundingClientRect().width / 2,
+      top:
+        li.getBoundingClientRect().top + li.getBoundingClientRect().height /2
+    };
+    const distance = {
+      x: listPosition.left - cursorPosition.left,
+      y: listPosition.top - cursorPosition.top,
+    };
+
+    const angle = Math.atan2(distance.x, distance.y);
+    const hypotenuse = Math.sqrt(
+      distance.x * distance.x + distance.y * distance.y
+    );
+
+    if (hypotenuse < listDistance) {
+      
+      gsap.to(li, 0.2, {
+        x: -((Math.sin(angle) * hypotenuse)/8),
+        y: -((Math.cos(angle) * hypotenuse)/15),
+      });
+    } else {
+      gsap.to(li, 0.2, {
         x: 0,
         y: 0,
       });
