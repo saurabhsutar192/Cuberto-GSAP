@@ -2,7 +2,7 @@ let menuButton = document.getElementById("menuButton");
 let menuContainer = document.getElementById("menuContainer");
 let list = document.getElementsByTagName("li");
 let anchors = document.querySelectorAll("li a");
-let links = document.querySelectorAll("li a h5");
+let rolls = document.querySelectorAll("li a h5 span");
 let cursor = document.querySelector(".cursor");
 let menuBars = document.querySelectorAll(".menuButton div");
 gsap.registerPlugin(CSSRulePlugin);
@@ -58,7 +58,7 @@ gsap.registerEffect({
   defaults: { scale: 0 },
 });
 function parallaxIt(e, target, movement) {
-  let cont = target.parentNode;
+  let cont = target;
 
   var relX = e.clientX - cont.getBoundingClientRect().left + window.scrollX;
   var relY = e.clientY - cont.getBoundingClientRect().top + window.scrollY;
@@ -76,10 +76,10 @@ menuButton.addEventListener("click", () => {
   menuTween.progress() * 100 > 0 ? menuTween.reverse() : menuTween.play();
 });
 
-for (link of links) {
+for (link of anchors) {
   link.addEventListener("mouseenter", (e) => {
-    let target = e.currentTarget.parentNode.parentNode.parentNode;
-    let child = e.currentTarget.childNodes[0];
+    let target = e.currentTarget.parentNode.parentNode;
+    let child = e.currentTarget.children[0].children[0];
 
     target.classList[0] === "small"
       ? gsap.effects.roll(child, { y: -130 })
@@ -90,7 +90,7 @@ for (link of links) {
     cursor.classList.add("filter2");
   });
   link.addEventListener("mouseleave", (e) => {
-    let child = e.currentTarget.childNodes[0];
+    let child = e.currentTarget.children[0].children[0];
     gsap.effects.zoom(".cursor", { scale: 1 });
 
     cursor.classList.remove("filter2");
@@ -99,7 +99,7 @@ for (link of links) {
     gsap.to(e.currentTarget, 0.3, { x: 0, y: 0 });
   });
   link.addEventListener("mousemove", (e) => {
-    let target = e.currentTarget.parentNode.parentNode.parentNode;
+    let target = e.currentTarget.parentNode.parentNode;
     target.classList[0] === "big"
       ? parallaxIt(e, e.currentTarget, 25)
       : parallaxIt(e, e.currentTarget, 15);
