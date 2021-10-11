@@ -2,7 +2,7 @@ let menuButton = document.getElementById("menuButton");
 let menuContainer = document.getElementById("menuContainer");
 let list = document.getElementsByTagName("li");
 let anchors = document.querySelectorAll("li a");
-// let rolls = document.querySelectorAll("li a h5 span");
+
 let cursor = document.querySelector(".cursor");
 let menuBars = document.querySelectorAll(" .ham div");
 let crossBars = document.querySelectorAll(" .cross div");
@@ -26,20 +26,12 @@ let menuTween = gsap.fromTo(
     paused: true,
   }
 );
-// let menuOut=gsap.to(
-//   ".menuContainer",{
-//     opacity: 0,
 
-//     xPercent: 100,
-//     paused:true
-//   }
-// )
 let menuAnim = gsap.timeline();
 
 menuAnim
   .to(".ham div", {
     scaleX: 0,
-    // paused: true,
   })
   .fromTo(
     ".cross div:nth-child(1)",
@@ -47,7 +39,6 @@ menuAnim
     {
       scaleX: 0,
       rotate: "45deg",
-      // paused: true,
     },
     {
       scaleX: 1,
@@ -60,12 +51,10 @@ menuAnim
     {
       scaleX: 0,
       rotate: "-45deg",
-      // paused: true,
     },
     {
       scaleX: 1,
       rotate: "-45deg",
-      // paused: true,
     }
   );
 
@@ -225,20 +214,3 @@ window.addEventListener("mousemove", (e) => {
     });
   }
 });
-
-// window.addEventListener("mouseover", () => {
-//   gsap.effects.zoom(".cursor", { scale: 1 });
-// });
-
-// window.addEventListener("mouseout", (e) => {
-//   gsap.effects.zoom(".cursor", { scale: 0 });
-// });
-
-// gsap.from(
-//   CSSRulePlugin.getRule("::after"),
-
-//   {
-//     cssRule: { skewY: 7 },
-//     duration: 2,
-//   }
-// );
