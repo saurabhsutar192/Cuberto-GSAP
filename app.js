@@ -60,9 +60,7 @@ menuAnim
 
 menuAnim.pause();
 
-gsap.to(".ham div", {
-  margin: "3px 0",
-});
+let rollTime = gsap.timeline();
 
 gsap.registerEffect({
   name: "roll",
@@ -132,13 +130,13 @@ for (link of anchors) {
     } else {
       gsap.effects.roll(child, { y: -105 });
     }
-    for (skew of skews) {
-      gsap.fromTo(
-        skew,
-        { cssRule: { skewY: "7deg" } },
-        { cssRule: { skewY: 0 } }
-      );
-    }
+    // for (skew of skews) {
+    //   gsap.fromTo(
+    //     skew,
+    //     { cssRule: { skewY: "7deg" } },
+    //     { cssRule: { skewY: 0 } }
+    //   );
+    // }
     gsap.effects.zoom(".cursor", { scale: 6 });
 
     cursor.classList.add("filter2");
@@ -148,7 +146,13 @@ for (link of anchors) {
     gsap.effects.zoom(".cursor", { scale: 1 });
 
     cursor.classList.remove("filter2");
-
+    // for (skew of skews) {
+    //   gsap.fromTo(
+    //     skew,
+    //     { cssRule: { skewY: 0 } },
+    //     { cssRule: { skewY: "7deg" } }
+    //   );
+    // }
     gsap.effects.roll(child, { y: 0 });
     gsap.to(e.currentTarget, 0.3, { x: 0, y: 0 });
   });
@@ -161,7 +165,6 @@ for (link of anchors) {
 }
 
 window.addEventListener("mousemove", (e) => {
-  // gsap.effects.move(".cursor", { top: e.pageY, left: e.pageX });
   const cursorPosition = {
     left: e.clientX,
     top: e.clientY,
