@@ -57,24 +57,29 @@ gsap.registerEffect({
   },
   defaults: { scale: 0 },
 });
+function parallaxIt(e, target, movement) {
+  let cont = target;
+
+  var relX = e.clientX - cont.offsetLeft;
+  var relY = e.clientY - cont.offsetTop;
+
+  gsap.to(target, 0.3, {
+    x: ((relX - cont.offsetWidth / 2) / cont.offsetWidth) * movement,
+    y: ((relY - cont.offsetHeight / 2) / cont.offsetHeight) * movement,
+    ease: Power2.easeOut,
+  });
+}
 
 menuButton.addEventListener("click", () => {
   menuTween.progress() * 100 > 0 ? menuTween.reverse() : menuTween.play();
 });
 
-for (li of anchors) {
-  li.addEventListener("mousemove", (e) => {
-    let target = e.currentTarget;
-    let child = target.childNodes[0].childNodes[0];
-    // gsap.from(
-    //   CSSRulePlugin.getRule("::after"),
+for (link of links) {
+  link.addEventListener("mouseenter", (e) => {
+    let target = e.currentTarget.parentNode.parentNode.parentNode;
+    let child = e.currentTarget.childNodes[0];
 
-    //   {
-    //     cssRule: { skewY: 7 },
-    //     duration: 2,
-    //   }
-    // );
-    target.classList[0] === "smallRoll"
+    target.classList[0] === "small"
       ? gsap.effects.roll(child, { y: -130 })
       : gsap.effects.roll(child, { y: -105 });
 
@@ -82,13 +87,20 @@ for (li of anchors) {
 
     cursor.classList.add("filter2");
   });
-  li.addEventListener("mouseleave", (e) => {
-    let child = e.target.childNodes[0].childNodes[0];
+  link.addEventListener("mouseleave", (e) => {
+    let child = e.currentTarget.childNodes[0];
     gsap.effects.zoom(".cursor", { scale: 1 });
 
     cursor.classList.remove("filter2");
 
     gsap.effects.roll(child, { y: 0 });
+    gsap.to(e.currentTarget, 0.3, { x: 0, y: 0 });
+  });
+  link.addEventListener("mousemove", (e) => {
+    let target = e.currentTarget.parentNode.parentNode.parentNode;
+    target.classList[0] === "big"
+      ? parallaxIt(e, e.currentTarget, 20)
+      : parallaxIt(e, e.currentTarget, 10);
   });
 }
 
@@ -149,42 +161,6 @@ window.addEventListener("mousemove", (e) => {
       });
     }
   }
-
-  // for lists
-
-  for (li of links) {
-    
-    const listDistance = li.getBoundingClientRect().width/4;
-
-    const listPosition = {
-      left:
-        li.getBoundingClientRect().left + li.getBoundingClientRect().width / 2,
-      top:
-        li.getBoundingClientRect().top + li.getBoundingClientRect().height /2
-    };
-    const distance = {
-      x: listPosition.left - cursorPosition.left,
-      y: listPosition.top - cursorPosition.top,
-    };
-
-    const angle = Math.atan2(distance.x, distance.y);
-    const hypotenuse = Math.sqrt(
-      distance.x * distance.x + distance.y * distance.y
-    );
-
-    if (hypotenuse < listDistance) {
-      
-      gsap.to(li, 0.2, {
-        x: -((Math.sin(angle) * hypotenuse)/8),
-        y: -((Math.cos(angle) * hypotenuse)/15),
-      });
-    } else {
-      gsap.to(li, 0.2, {
-        x: 0,
-        y: 0,
-      });
-    }
-  }
 });
 
 // window.addEventListener("mouseover", () => {
@@ -194,3 +170,43 @@ window.addEventListener("mousemove", (e) => {
 // window.addEventListener("mouseout", (e) => {
 //   gsap.effects.zoom(".cursor", { scale: 0 });
 // });
+
+// gsap.from(
+//   CSSRulePlugin.getRule("::after"),
+
+//   {
+//     cssRule: { skewY: 7 },
+//     duration: 2,
+//   }
+// );
+
+//   const listDistance = li.getBoundingClientRect().width/4;
+
+//   const listPosition = {
+//     left:
+//       li.getBoundingClientRect().left + li.getBoundingClientRect().width / 2,
+//     top:
+//       li.getBoundingClientRect().top + li.getBoundingClientRect().height /2
+//   };
+//   const distance = {
+//     x: listPosition.left - cursorPosition.left,
+//     y: listPosition.top - cursorPosition.top,
+//   };
+
+//   const angle = Math.atan2(distance.x, distance.y);
+//   const hypotenuse = Math.sqrt(
+//     distance.x * distance.x + distance.y * distance.y
+//   );
+
+//   if (hypotenuse < listDistance) {
+
+//     gsap.to(li, 0.2, {
+//       x: -((Math.sin(angle) * hypotenuse)/8),
+//       y: -((Math.cos(angle) * hypotenuse)/15),
+//     });
+//   } else {
+//     gsap.to(li, 0.2, {
+//       x: 0,
+//       y: 0,
+//     });
+//   }
