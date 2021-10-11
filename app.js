@@ -58,14 +58,16 @@ gsap.registerEffect({
   defaults: { scale: 0 },
 });
 function parallaxIt(e, target, movement) {
-  let cont = target;
+  let cont = target.parentNode;
 
-  var relX = e.clientX - cont.offsetLeft;
-  var relY = e.clientY - cont.offsetTop;
+  var relX = e.clientX - cont.getBoundingClientRect().left + window.scrollX;
+  var relY = e.clientY - cont.getBoundingClientRect().top + window.scrollY;
 
   gsap.to(target, 0.3, {
     x: ((relX - cont.offsetWidth / 2) / cont.offsetWidth) * movement,
-    y: ((relY - cont.offsetHeight / 2) / cont.offsetHeight) * movement,
+    y:
+      (((relY - cont.offsetHeight / 2) / cont.offsetHeight) * movement * 50) /
+      100,
     ease: Power2.easeOut,
   });
 }
@@ -99,8 +101,8 @@ for (link of links) {
   link.addEventListener("mousemove", (e) => {
     let target = e.currentTarget.parentNode.parentNode.parentNode;
     target.classList[0] === "big"
-      ? parallaxIt(e, e.currentTarget, 20)
-      : parallaxIt(e, e.currentTarget, 10);
+      ? parallaxIt(e, e.currentTarget, 25)
+      : parallaxIt(e, e.currentTarget, 15);
   });
 }
 
@@ -179,34 +181,3 @@ window.addEventListener("mousemove", (e) => {
 //     duration: 2,
 //   }
 // );
-
-//   const listDistance = li.getBoundingClientRect().width/4;
-
-//   const listPosition = {
-//     left:
-//       li.getBoundingClientRect().left + li.getBoundingClientRect().width / 2,
-//     top:
-//       li.getBoundingClientRect().top + li.getBoundingClientRect().height /2
-//   };
-//   const distance = {
-//     x: listPosition.left - cursorPosition.left,
-//     y: listPosition.top - cursorPosition.top,
-//   };
-
-//   const angle = Math.atan2(distance.x, distance.y);
-//   const hypotenuse = Math.sqrt(
-//     distance.x * distance.x + distance.y * distance.y
-//   );
-
-//   if (hypotenuse < listDistance) {
-
-//     gsap.to(li, 0.2, {
-//       x: -((Math.sin(angle) * hypotenuse)/8),
-//       y: -((Math.cos(angle) * hypotenuse)/15),
-//     });
-//   } else {
-//     gsap.to(li, 0.2, {
-//       x: 0,
-//       y: 0,
-//     });
-//   }
