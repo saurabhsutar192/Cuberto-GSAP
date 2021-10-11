@@ -59,45 +59,64 @@ nav h3 {
   position: sticky;
   right: 0;
   z-index: 1;
-  
+  /* background: rgb(252, 209, 69); */
   cursor: pointer;
 }
 
-.menuButton::before{
-  content: "";
+.menuButton .ham,
+.cross {
   position: absolute;
-  /* transform-origin: 20% 80%; */
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  background: black;
-  border-radius: 50%;
-  z-index: -1;
-transform: scale(0);
+
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  /* background-color: pink; */
 }
-
-
-
-
-.menuButton div {
+.menuButton .ham div,
+.cross div {
   display: block;
-  width: 100%;
-  height: 2px;
   margin: 3px 0;
+  width: 100%;
+
+  height: 2px;
   background-color: black;
 }
-.menuButton div:nth-child(1){
-transform: 0 50%;
-}
-.menuButton div:nth-child(2){
-transform: 100% 50%;
+
+.ham div:nth-child(1),
+.cross div:nth-child(1) {
+  transform-origin: 0% 50%;
 }
 
+.ham div:nth-child(2),
+.cross div:nth-child(2) {
+  transform-origin: 100% 0%;
+}
 
+.cross div {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  margin: 0;
+}
+
+.cross div:nth-child(1) {
+  left: 15%;
+  /* transform: rotate(45deg) scale(0); */
+}
+.cross div:nth-child(2) {
+  left: auto;
+  right: 15%;
+  /* transform: rotate(-45deg) scale(0); */
+}
 
 .menuContainer {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,7 +130,6 @@ transform: 100% 50%;
   background: #fff;
   transform-origin: 100% 50%;
 }
-
 
 .menuContainer h4 {
   color: rgba(0, 0, 0, 0.3);
@@ -137,7 +155,7 @@ transform: 100% 50%;
 .social a,
 .menu a {
   /* border: 2px solid black; */
- 
+
   display: inline-block;
 }
 .social li h5,
@@ -238,11 +256,15 @@ transform: 100% 50%;
   background: transparent;
 
   backdrop-filter: invert(100%);
+  -webkit-backdrop-filter: invert(100%);
+  -moz-backdrop-filter: invert(100%);
 }
 .filter2 {
   background: transparent;
 
   backdrop-filter: invert(100%);
+  -webkit-backdrop-filter: invert(100%);
+  -moz-backdrop-filter: invert(100%);
 }
 
 @media (max-width: 767px) {

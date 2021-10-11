@@ -2,11 +2,14 @@ let menuButton = document.getElementById("menuButton");
 let menuContainer = document.getElementById("menuContainer");
 let list = document.getElementsByTagName("li");
 let anchors = document.querySelectorAll("li a");
-let rolls = document.querySelectorAll("li a h5 span");
+// let rolls = document.querySelectorAll("li a h5 span");
 let cursor = document.querySelector(".cursor");
-let menuBars = document.querySelectorAll(".menuButton div");
+let menuBars = document.querySelectorAll(" .ham div");
+let crossBars = document.querySelectorAll(" .cross div");
 gsap.registerPlugin(CSSRulePlugin);
-let menuCirc = CSSRulePlugin.getRule(".menuButton::before");
+
+let skews = CSSRulePlugin.getRule("::after");
+
 let menuTween = gsap.fromTo(
   ".menuContainer",
   {
@@ -23,6 +26,54 @@ let menuTween = gsap.fromTo(
     paused: true,
   }
 );
+// let menuOut=gsap.to(
+//   ".menuContainer",{
+//     opacity: 0,
+
+//     xPercent: 100,
+//     paused:true
+//   }
+// )
+let menuAnim = gsap.timeline();
+
+menuAnim
+  .to(".ham div", {
+    scaleX: 0,
+    // paused: true,
+  })
+  .fromTo(
+    ".cross div:nth-child(1)",
+    0.2,
+    {
+      scaleX: 0,
+      rotate: "45deg",
+      // paused: true,
+    },
+    {
+      scaleX: 1,
+      rotate: "45deg",
+    }
+  )
+  .fromTo(
+    ".cross div:nth-child(2)",
+    0.2,
+    {
+      scaleX: 0,
+      rotate: "-45deg",
+      // paused: true,
+    },
+    {
+      scaleX: 1,
+      rotate: "-45deg",
+      // paused: true,
+    }
+  );
+
+menuAnim.pause();
+
+gsap.to(".ham div", {
+  margin: "3px 0",
+});
 
 gsap.registerEffect({
   name: "roll",
@@ -60,8 +111,8 @@ gsap.registerEffect({
 function parallaxIt(e, target, movement) {
   let cont = target;
 
-  var relX = e.clientX - cont.getBoundingClientRect().left + window.scrollX;
-  var relY = e.clientY - cont.getBoundingClientRect().top + window.scrollY;
+  let relX = e.clientX - cont.getBoundingClientRect().left + window.scrollX;
+  let relY = e.clientY - cont.getBoundingClientRect().top + window.scrollY;
 
   gsap.to(target, 0.3, {
     x: ((relX - cont.offsetWidth / 2) / cont.offsetWidth) * movement,
@@ -73,7 +124,13 @@ function parallaxIt(e, target, movement) {
 }
 
 menuButton.addEventListener("click", () => {
-  menuTween.progress() * 100 > 0 ? menuTween.reverse() : menuTween.play();
+  if (menuTween.progress() * 100 > 0) {
+    menuTween.timeScale(3).reverse();
+    menuAnim.reverse();
+  } else {
+    menuTween.timeScale(1).play();
+    menuAnim.play();
+  }
 });
 
 for (link of anchors) {
@@ -81,10 +138,18 @@ for (link of anchors) {
     let target = e.currentTarget.parentNode.parentNode;
     let child = e.currentTarget.children[0].children[0];
 
-    target.classList[0] === "small"
-      ? gsap.effects.roll(child, { y: -130 })
-      : gsap.effects.roll(child, { y: -105 });
-
+    if (target.classList[0] === "small") {
+      gsap.effects.roll(child, { y: -130 });
+    } else {
+      gsap.effects.roll(child, { y: -105 });
+    }
+    for (skew of skews) {
+      gsap.fromTo(
+        skew,
+        { cssRule: { skewY: "7deg" } },
+        { cssRule: { skewY: 0 } }
+      );
+    }
     gsap.effects.zoom(".cursor", { scale: 6 });
 
     cursor.classList.add("filter2");
@@ -141,12 +206,10 @@ window.addEventListener("mousemove", (e) => {
       width: menuButton.clientWidth,
     });
 
-    for (bar of menuBars) {
-      gsap.to(bar, 0.2, {
-        x: -((Math.sin(angle) * hypotenuse) / 18),
-        y: -((Math.cos(angle) * hypotenuse) / 18),
-      });
-    }
+    gsap.to(".menuButton>div", 0.2, {
+      x: -((Math.sin(angle) * hypotenuse) / 18),
+      y: -((Math.cos(angle) * hypotenuse) / 18),
+    });
   } else {
     cursor.classList.remove("filter");
     gsap.to(cursor, 0.2, {
@@ -156,12 +219,10 @@ window.addEventListener("mousemove", (e) => {
       width: "10px",
     });
 
-    for (bar of menuBars) {
-      gsap.to(bar, 0.2, {
-        x: 0,
-        y: 0,
-      });
-    }
+    gsap.to(".menuButton>div", 0.2, {
+      x: 0,
+      y: 0,
+    });
   }
 });
 
