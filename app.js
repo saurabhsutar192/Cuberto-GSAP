@@ -1,4 +1,5 @@
 let menuButton = document.getElementById("menuButton");
+
 let menuContainer = document.getElementById("menuContainer");
 
 let anchors = document.querySelectorAll("li a");
@@ -95,6 +96,8 @@ function parallaxIt({
   top: top,
   left: left,
   container: container,
+  duration: duration,
+  ease: ease,
 }) {
   let containerPosition = container
     ? {
@@ -121,7 +124,7 @@ function parallaxIt({
   xP = xPercent ? xPercent : 100;
 
   yP = yPercent ? yPercent : 100;
-  gsap.to(target, 0.3, {
+  gsap.to(target, duration ? duration : 0.3, {
     x:
       (((relX - containerSize.width / 2) / containerSize.width) *
         movement *
@@ -136,7 +139,7 @@ function parallaxIt({
     left: left ? left : containerPosition.left,
     height: height ? height : containerSize.height,
     width: width ? width : containerSize.width,
-    ease: Power2.easeOut,
+    ease: ease ? ease : "Power2.easeOut",
   });
 }
 
@@ -230,28 +233,34 @@ window.addEventListener("mousemove", (e) => {
     cursorPosition.top < menuPosition.top + menuSize.height
   ) {
     cursor.classList.add("filter");
-    // gsap.to(cursor, 0.2, {
-    //   x: ((relX - menuSize.width / 2) / menuSize.width) * 10,
-    //   y: ((relY - menuSize.height / 2) / menuSize.height) * 10,
-    //   left: menuPosition.left,
-    //   top: menuPosition.top,
-    //   height: menuButton.clientHeight,
-    //   width: menuButton.clientWidth,
-    // });
+
     parallaxIt({
       e: e,
       target: cursor,
       container: menuButton,
       movement: 10,
+      duration: 0.2,
     });
 
-    gsap.to(".menuButton>div", 0.2, {
-      x: ((relX - menuSize.width / 2) / menuSize.width) * 3,
-      y: ((relY - menuSize.height / 2) / menuSize.height) * 3,
-    });
+    // gsap.to(".menuButton>div", 0.2, {
+    //   x: ((relX - menuSize.width / 2) / menuSize.width) * 3,
+    //   y: ((relY - menuSize.height / 2) / menuSize.height) * 3,
+    // });
+    for (icon of icons) {
+      parallaxIt({
+        e: e,
+        target: icon,
+        movement: 3,
+        duration: 0.2,
+        top: "50%",
+        left: "50%", //default positioning as per css
+      });
+    }
   } else {
     cursor.classList.remove("filter");
     gsap.to(cursor, 0.2, {
+      x: 0,
+      y: 0,
       left: cursorPosition.left,
       top: cursorPosition.top,
       height: "10px",
