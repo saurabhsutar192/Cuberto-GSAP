@@ -76,16 +76,6 @@ gsap.registerEffect({
 });
 
 gsap.registerEffect({
-  name: "move",
-  effect: (target, config) => {
-    return gsap.to(target, {
-      top: config.top,
-      left: config.left,
-    });
-  },
-});
-
-gsap.registerEffect({
   name: "zoom",
   effect: (target, config) => {
     return gsap.to(target, {
@@ -120,32 +110,6 @@ menuButton.addEventListener("click", () => {
     menuAnim.play();
   }
 });
-// menuButton.addEventListener("mouseenter", (e) => {
-//   // menuButton.classList.add("menuFilter");
-//   gsap.to(menuButton, {
-//     background: "#000",
-//   });
-// });
-// menuButton.addEventListener("mousemove", (e) => {
-//   parallaxIt(e, e.currentTarget, 25);
-//   for (icon of icons) {
-//     parallaxIt(e, icon, -5);
-//   }
-// });
-// menuButton.addEventListener("mouseleave", (e) => {
-//   // menuButton.classList.remove("menuFilter");
-//   gsap.to(menuButton, {
-//     background: "#fff",
-//   });
-//   gsap.to(menuButton, {
-//     x: 0,
-//     y: 0,
-//   });
-//   gsap.to(".icon", {
-//     x: 0,
-//     y: 0,
-//   });
-// });
 
 for (link of anchors) {
   link.addEventListener("mouseenter", (e) => {
@@ -192,16 +156,16 @@ for (link of anchors) {
 }
 
 window.addEventListener("mousemove", (e) => {
-  const cursorPosition = {
+  let cursorPosition = {
     left: e.clientX,
     top: e.clientY,
   };
 
-  const menuPosition = {
+  let menuPosition = {
     left: menuButton.getBoundingClientRect().left,
     top: menuButton.getBoundingClientRect().top,
   };
-  const menuSize = {
+  let menuSize = {
     width: menuButton.getBoundingClientRect().width,
     height: menuButton.getBoundingClientRect().height,
   };
@@ -245,50 +209,12 @@ window.addEventListener("mousemove", (e) => {
   }
 });
 
-// const menuDistance = menuButton.getBoundingClientRect().width;
-
-// const menuPosition = {
-//   left:
-//     menuButton.getBoundingClientRect().left +
-//     menuButton.getBoundingClientRect().width / 2,
-//   top:
-//     menuButton.getBoundingClientRect().top +
-//     menuButton.getBoundingClientRect().height / 2,
-// };
-// const distance = {
-//   x: menuPosition.left - cursorPosition.left,
-//   y: menuPosition.top - cursorPosition.top,
-// };
-
-// const angle = Math.atan2(distance.x, distance.y);
-// const hypotenuse = Math.sqrt(
-//   distance.x * distance.x + distance.y * distance.y
-// );
-
-// if (hypotenuse < menuDistance) {
-//   cursor.classList.add("filter");
-//   gsap.to(cursor, 0.2, {
-//     left: menuPosition.left - (Math.sin(angle) * hypotenuse) / 5 - 35,
-//     top: menuPosition.top - (Math.cos(angle) * hypotenuse) / 5 - 35,
-//     height: menuButton.clientHeight,
-//     width: menuButton.clientWidth,
-//   });
-
-//   gsap.to(".menuButton>div", 0.2, {
-//     x: -((Math.sin(angle) * hypotenuse) / 18),
-//     y: -((Math.cos(angle) * hypotenuse) / 18),
-//   });
-// } else {
-//   cursor.classList.remove("filter");
-//   gsap.to(cursor, 0.2, {
-//     left: cursorPosition.left,
-//     top: cursorPosition.top,
-//     height: "10px",
-//     width: "10px",
-//   });
-
-//   gsap.to(".menuButton>div", 0.2, {
-//     x: 0,
-//     y: 0,
-//   });
-// }
+window.addEventListener("mouseout", (e) => {
+  if (e.toElement == null && e.relatedTarget == null) {
+    gsap.to(cursor, 0.2, {
+      height: "0px",
+      width: "0px",
+      duration: 1,
+    });
+  }
+});
