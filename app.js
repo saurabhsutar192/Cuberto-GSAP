@@ -84,17 +84,58 @@ gsap.registerEffect({
   },
   defaults: { scale: 0 },
 });
-function parallaxIt(e, target, movement) {
-  let cont = target;
+function parallaxIt({
+  e: e,
+  target: target,
+  movement: movement,
+  xPercent: xPercent,
+  yPercent: yPercent,
+  height: height,
+  width: width,
+  top: top,
+  left: left,
+  container: container,
+}) {
+  let containerPosition = container
+    ? {
+        left: container.getBoundingClientRect().left,
+        top: container.getBoundingClientRect().top,
+      }
+    : {
+        left: target.getBoundingClientRect().left,
+        top: target.getBoundingClientRect().top,
+      };
+  let containerSize = container
+    ? {
+        width: container.getBoundingClientRect().width,
+        height: container.getBoundingClientRect().height,
+      }
+    : {
+        width: target.getBoundingClientRect().width,
+        height: target.getBoundingClientRect().height,
+      };
 
-  let relX = e.clientX - cont.getBoundingClientRect().left + window.scrollX;
-  let relY = e.clientY - cont.getBoundingClientRect().top + window.scrollY;
+  let relX = e.clientX - containerPosition.left + window.scrollX;
+  let relY = e.clientY - containerPosition.top + window.scrollY;
 
+  xP = xPercent ? xPercent : 100;
+
+  yP = yPercent ? yPercent : 100;
   gsap.to(target, 0.3, {
-    x: ((relX - cont.offsetWidth / 2) / cont.offsetWidth) * movement,
-    y:
-      (((relY - cont.offsetHeight / 2) / cont.offsetHeight) * movement * 50) /
+    x:
+      (((relX - containerSize.width / 2) / containerSize.width) *
+        movement *
+        xP) /
       100,
+    y:
+      (((relY - containerSize.width / 2) / containerSize.width) *
+        movement *
+        yP) /
+      100,
+    top: top ? top : containerPosition.top,
+    left: left ? left : containerPosition.left,
+    height: height ? height : containerSize.height,
+    width: width ? width : containerSize.width,
     ease: Power2.easeOut,
   });
 }
@@ -147,8 +188,20 @@ for (link of anchors) {
   link.addEventListener("mousemove", (e) => {
     let target = e.currentTarget.parentNode.parentNode;
     target.classList[0] === "big"
-      ? parallaxIt(e, e.currentTarget, 25)
-      : parallaxIt(e, e.currentTarget, 15);
+      ? parallaxIt({
+          e: e,
+          target: e.currentTarget,
+          movement: 25,
+
+          yPercent: 50,
+        })
+      : parallaxIt({
+          e: e,
+          target: e.currentTarget,
+          movement: 15,
+
+          yPercent: 50,
+        });
   });
 }
 
@@ -177,13 +230,19 @@ window.addEventListener("mousemove", (e) => {
     cursorPosition.top < menuPosition.top + menuSize.height
   ) {
     cursor.classList.add("filter");
-    gsap.to(cursor, 0.2, {
-      x: ((relX - menuSize.width / 2) / menuSize.width) * 10,
-      y: ((relY - menuSize.height / 2) / menuSize.height) * 10,
-      left: menuPosition.left,
-      top: menuPosition.top,
-      height: menuButton.clientHeight,
-      width: menuButton.clientWidth,
+    // gsap.to(cursor, 0.2, {
+    //   x: ((relX - menuSize.width / 2) / menuSize.width) * 10,
+    //   y: ((relY - menuSize.height / 2) / menuSize.height) * 10,
+    //   left: menuPosition.left,
+    //   top: menuPosition.top,
+    //   height: menuButton.clientHeight,
+    //   width: menuButton.clientWidth,
+    // });
+    parallaxIt({
+      e: e,
+      target: cursor,
+      container: menuButton,
+      movement: 10,
     });
 
     gsap.to(".menuButton>div", 0.2, {
