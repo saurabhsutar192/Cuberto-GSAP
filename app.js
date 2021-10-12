@@ -5,6 +5,7 @@ let anchors = document.querySelectorAll("li a");
 
 let cursor = document.querySelector(".cursor");
 let menuBars = document.querySelectorAll(" .ham div");
+let icons = document.querySelectorAll(".icon");
 let crossBars = document.querySelectorAll(" .cross div");
 gsap.registerPlugin(CSSRulePlugin);
 
@@ -119,6 +120,32 @@ menuButton.addEventListener("click", () => {
     menuAnim.play();
   }
 });
+// menuButton.addEventListener("mouseenter", (e) => {
+//   // menuButton.classList.add("menuFilter");
+//   gsap.to(menuButton, {
+//     background: "#000",
+//   });
+// });
+// menuButton.addEventListener("mousemove", (e) => {
+//   parallaxIt(e, e.currentTarget, 25);
+//   for (icon of icons) {
+//     parallaxIt(e, icon, -5);
+//   }
+// });
+// menuButton.addEventListener("mouseleave", (e) => {
+//   // menuButton.classList.remove("menuFilter");
+//   gsap.to(menuButton, {
+//     background: "#fff",
+//   });
+//   gsap.to(menuButton, {
+//     x: 0,
+//     y: 0,
+//   });
+//   gsap.to(".icon", {
+//     x: 0,
+//     y: 0,
+//   });
+// });
 
 for (link of anchors) {
   link.addEventListener("mouseenter", (e) => {
@@ -169,38 +196,38 @@ window.addEventListener("mousemove", (e) => {
     left: e.clientX,
     top: e.clientY,
   };
-  const menuDistance = menuButton.getBoundingClientRect().width;
 
   const menuPosition = {
-    left:
-      menuButton.getBoundingClientRect().left +
-      menuButton.getBoundingClientRect().width / 2,
-    top:
-      menuButton.getBoundingClientRect().top +
-      menuButton.getBoundingClientRect().height / 2,
+    left: menuButton.getBoundingClientRect().left,
+    top: menuButton.getBoundingClientRect().top,
   };
-  const distance = {
-    x: menuPosition.left - cursorPosition.left,
-    y: menuPosition.top - cursorPosition.top,
+  const menuSize = {
+    width: menuButton.getBoundingClientRect().width,
+    height: menuButton.getBoundingClientRect().height,
   };
 
-  const angle = Math.atan2(distance.x, distance.y);
-  const hypotenuse = Math.sqrt(
-    distance.x * distance.x + distance.y * distance.y
-  );
+  let relX = cursorPosition.left - menuPosition.left + window.scrollX;
+  let relY = cursorPosition.top - menuPosition.top + window.scrollY;
 
-  if (hypotenuse < menuDistance) {
+  if (
+    cursorPosition.left > menuPosition.left &&
+    cursorPosition.left < menuPosition.left + menuSize.width &&
+    cursorPosition.top > menuPosition.top &&
+    cursorPosition.top < menuPosition.top + menuSize.height
+  ) {
     cursor.classList.add("filter");
     gsap.to(cursor, 0.2, {
-      left: menuPosition.left - (Math.sin(angle) * hypotenuse) / 5 - 35,
-      top: menuPosition.top - (Math.cos(angle) * hypotenuse) / 5 - 35,
+      x: ((relX - menuSize.width / 2) / menuSize.width) * 10,
+      y: ((relY - menuSize.height / 2) / menuSize.height) * 10,
+      left: menuPosition.left,
+      top: menuPosition.top,
       height: menuButton.clientHeight,
       width: menuButton.clientWidth,
     });
 
     gsap.to(".menuButton>div", 0.2, {
-      x: -((Math.sin(angle) * hypotenuse) / 18),
-      y: -((Math.cos(angle) * hypotenuse) / 18),
+      x: ((relX - menuSize.width / 2) / menuSize.width) * 3,
+      y: ((relY - menuSize.height / 2) / menuSize.height) * 3,
     });
   } else {
     cursor.classList.remove("filter");
@@ -217,3 +244,51 @@ window.addEventListener("mousemove", (e) => {
     });
   }
 });
+
+// const menuDistance = menuButton.getBoundingClientRect().width;
+
+// const menuPosition = {
+//   left:
+//     menuButton.getBoundingClientRect().left +
+//     menuButton.getBoundingClientRect().width / 2,
+//   top:
+//     menuButton.getBoundingClientRect().top +
+//     menuButton.getBoundingClientRect().height / 2,
+// };
+// const distance = {
+//   x: menuPosition.left - cursorPosition.left,
+//   y: menuPosition.top - cursorPosition.top,
+// };
+
+// const angle = Math.atan2(distance.x, distance.y);
+// const hypotenuse = Math.sqrt(
+//   distance.x * distance.x + distance.y * distance.y
+// );
+
+// if (hypotenuse < menuDistance) {
+//   cursor.classList.add("filter");
+//   gsap.to(cursor, 0.2, {
+//     left: menuPosition.left - (Math.sin(angle) * hypotenuse) / 5 - 35,
+//     top: menuPosition.top - (Math.cos(angle) * hypotenuse) / 5 - 35,
+//     height: menuButton.clientHeight,
+//     width: menuButton.clientWidth,
+//   });
+
+//   gsap.to(".menuButton>div", 0.2, {
+//     x: -((Math.sin(angle) * hypotenuse) / 18),
+//     y: -((Math.cos(angle) * hypotenuse) / 18),
+//   });
+// } else {
+//   cursor.classList.remove("filter");
+//   gsap.to(cursor, 0.2, {
+//     left: cursorPosition.left,
+//     top: cursorPosition.top,
+//     height: "10px",
+//     width: "10px",
+//   });
+
+//   gsap.to(".menuButton>div", 0.2, {
+//     x: 0,
+//     y: 0,
+//   });
+// }

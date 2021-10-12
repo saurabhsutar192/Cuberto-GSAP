@@ -59,7 +59,7 @@ nav h3 {
   position: sticky;
   right: 0;
   z-index: 1;
-  /* background: rgb(252, 209, 69); */
+
   cursor: pointer;
 }
 
@@ -252,14 +252,22 @@ nav h3 {
   backdrop-filter: invert(100%);
 } */
 
-.filter {
+/* .menuFilter {
+  background: black;
+}
+.menuFilter .ham > div,
+.menuFilter .cross > div {
+  background: white;
+} */
+
+.filter2 {
   background: transparent;
 
   backdrop-filter: invert(100%);
   -webkit-backdrop-filter: invert(100%);
   -moz-backdrop-filter: invert(100%);
 }
-.filter2 {
+.filter {
   background: transparent;
 
   backdrop-filter: invert(100%);
