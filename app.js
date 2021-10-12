@@ -242,10 +242,6 @@ window.addEventListener("mousemove", (e) => {
       duration: 0.2,
     });
 
-    // gsap.to(".menuButton>div", 0.2, {
-    //   x: ((relX - menuSize.width / 2) / menuSize.width) * 3,
-    //   y: ((relY - menuSize.height / 2) / menuSize.height) * 3,
-    // });
     for (icon of icons) {
       parallaxIt({
         e: e,
