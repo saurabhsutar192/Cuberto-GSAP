@@ -1,15 +1,15 @@
 let menuButton = document.getElementById("menuButton");
 let menuContainer = document.getElementById("menuContainer");
-let list = document.getElementsByTagName("li");
+
 let anchors = document.querySelectorAll("li a");
 
 let cursor = document.querySelector(".cursor");
-let menuBars = document.querySelectorAll(" .ham div");
+
 let icons = document.querySelectorAll(".icon");
-let crossBars = document.querySelectorAll(" .cross div");
+
 gsap.registerPlugin(CSSRulePlugin);
 
-let skews = CSSRulePlugin.getRule("::after");
+// let skews = CSSRulePlugin.getRule("::after");
 
 let menuTween = gsap.fromTo(
   ".menuContainer",
@@ -121,13 +121,13 @@ for (link of anchors) {
     } else {
       gsap.effects.roll(child, { y: -105 });
     }
-    // for (skew of skews) {
-    //   gsap.fromTo(
-    //     skew,
-    //     { cssRule: { skewY: "7deg" } },
-    //     { cssRule: { skewY: 0 } }
-    //   );
-    // }
+
+    // gsap.fromTo(   // causing lag
+    //   CSSRulePlugin.getRule(".social li span::after"),
+    //   { cssRule: { skewY: "7deg" } },
+    //   { cssRule: { skewY: "0deg" } }
+    // );
+
     gsap.effects.zoom(".cursor", { scale: 6 });
 
     cursor.classList.add("filter2");
@@ -137,13 +137,12 @@ for (link of anchors) {
     gsap.effects.zoom(".cursor", { scale: 1 });
 
     cursor.classList.remove("filter2");
-    // for (skew of skews) {
-    //   gsap.fromTo(
-    //     skew,
-    //     { cssRule: { skewY: 0 } },
-    //     { cssRule: { skewY: "7deg" } }
-    //   );
-    // }
+
+    // gsap.fromTo(
+    //   CSSRulePlugin.getRule(".social li span::after"),
+    //   { cssRule: { skewY: "0deg" } },
+    //   { cssRule: { skewY: "7deg" } }
+    // );
     gsap.effects.roll(child, { y: 0 });
     gsap.to(e.currentTarget, 0.3, { x: 0, y: 0 });
   });
