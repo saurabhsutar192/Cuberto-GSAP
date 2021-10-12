@@ -61,8 +61,6 @@ menuAnim
 
 menuAnim.pause();
 
-let rollTime = gsap.timeline();
-
 gsap.registerEffect({
   name: "roll",
   effect: (targets, config) => {
