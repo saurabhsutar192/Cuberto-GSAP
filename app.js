@@ -12,18 +12,18 @@ gsap.registerPlugin(CSSRulePlugin);
 
 // let skews = CSSRulePlugin.getRule("::after");
 
-let menuTween = gsap.fromTo(
+let menuTween = gsap.to(
   ".menuContainer",
-  {
-    opacity: 0,
+  // {
+  //   opacity: 0,
 
-    xPercent: 100,
-  },
+  //   xPercent: 100,
+  // },
   {
     opacity: 1,
     duration: 1,
 
-    xPercent: 0,
+    xPercent: -100,
     ease: "power3.out",
     paused: true,
   }
