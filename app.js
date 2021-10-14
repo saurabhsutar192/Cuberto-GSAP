@@ -12,22 +12,14 @@ gsap.registerPlugin(CSSRulePlugin);
 
 // let skews = CSSRulePlugin.getRule("::after");
 
-let menuTween = gsap.to(
-  ".menuContainer",
-  // {
-  //   opacity: 0,
+let menuTween = gsap.to(".menuContainer", {
+  opacity: 1,
+  duration: 1,
 
-  //   xPercent: 100,
-  // },
-  {
-    opacity: 1,
-    duration: 1,
-
-    xPercent: -100,
-    ease: "power3.out",
-    paused: true,
-  }
-);
+  x: 0,
+  ease: "power3.out",
+  paused: true,
+});
 
 let menuAnim = gsap.timeline();
 
